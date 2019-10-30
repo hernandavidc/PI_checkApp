@@ -1,0 +1,107 @@
+[{
+        "model": "instituciones.institucion",
+        "pk": 1,
+        "fields": {
+            "nombre": "Universidad Pontificia Bolivariana",
+            "s": "universidad-pontificia-bolivariana"
+        }
+    },
+    {
+        "model": "instituciones.programa",
+        "pk": 1,
+        "fields": {
+            "nombre": "Ingenier\u00eda de Sistemas e Inform\u00e1tica",
+            "institucion": 1
+        }
+    },
+    {
+        "model": "instituciones.inscrito",
+        "pk": 270656,
+        "fields": {
+            "nombre": "Hernan David Alvarez Caballero",
+            "institucion": 1,
+            "programas": [1]
+        }
+    },
+    {
+        "model": "instituciones.inscrito",
+        "pk": 2,
+        "fields": {
+            "nombre": "Maria Andrea Claro",
+            "institucion": 1,
+            "programas": [1]
+        }
+    },
+    {
+        "model": "instituciones.inscrito",
+        "pk": 3,
+        "fields": {
+            "nombre": "Luis Guillermo Castilla",
+            "institucion": 1,
+            "programas": [1]
+        }
+    },
+    {
+        "model": "instituciones.inscrito",
+        "pk": 323025,
+        "fields": {
+            "nombre": "Andrés Felipe Herrera Jerez",
+            "institucion": 1,
+            "programas": [1]
+        }
+    },
+    {
+        "model": "instituciones.inscrito",
+        "pk": 332082,
+        "fields": {
+            "nombre": "Luis Felipe Gáfaro Jáuregui",
+            "institucion": 1,
+            "programas": [1]
+        }
+    },
+    {
+        "model": "instituciones.inscrito",
+        "pk": 322165,
+        "fields": {
+            "nombre": "Neyder Javier Tenza Aguilera",
+            "institucion": 1,
+            "programas": [1]
+        }
+    },
+    {
+        "model": "instituciones.inscrito",
+        "pk": 321708,
+        "fields": {
+            "nombre": "Jenny Marcela Garces Delgado",
+            "institucion": 1,
+            "programas": [1]
+        }
+    },
+    {
+        "model": "instituciones.inscrito",
+        "pk": 308531,
+        "fields": {
+            "nombre": "Fabián Andrés Barreto Rodríguez",
+            "institucion": 1,
+            "programas": [1]
+        }
+    },
+    {
+        "model": "instituciones.inscrito",
+        "pk": 318894,
+        "fields": {
+            "nombre": "Miguel Angel Oñate Falon",
+            "institucion": 1,
+            "programas": [1]
+        }
+    },
+    {
+        "model": "instituciones.inscrito",
+        "pk": 320177,
+        "fields": {
+            "nombre": "Diego luis diaz lizarazo",
+            "institucion": 1,
+            "programas": [1]
+        }
+    }
+]

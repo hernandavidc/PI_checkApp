@@ -1,0 +1,179 @@
+swagger: "2.0"
+info:
+  description: "Plataforma de validación de asistencia a eventos."
+  version: "1.0.0"
+  title: "CheckApp"
+  termsOfService: ""
+  contact:
+    email: "hernan.alvarez.2014@upb.edu.co"
+host: "checkapp.bucaramanga.upb.edu.co"
+basePath: "/"
+schemes:
+- "http"
+paths:
+  /eventos:
+    get:
+      tags:
+      - "evento"
+      summary: "Obtener todos los eventos de la institucion asociada a la cuenta"
+      description: ""
+      operationId: "getEventos"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Los eventos disponibles por institución."
+        required: true
+        schema:
+          $ref: "#/definitions/Evento"
+      responses:
+        405:
+          description: "Invalid input"
+      security:
+      - checkapp_auth:
+        - "read:eventos"
+      - api_key: []
+  /evento/{eventoId}:
+    get:
+      tags:
+      - "evento"
+      summary: "Encontrar por ID un evento"
+      description: "Retorna un solo evento"
+      operationId: "getEventoPorId"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "eventoId"
+        in: "path"
+        description: "ID of pet to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        404:
+          description: "Error: Evento not found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - api_key: []
+  /asistente/agregar/{eventoId}:
+    post:
+      tags:
+      - "evento"
+      summary: "Agregar asistente a un evento"
+      description: ""
+      operationId: "crearAsistente"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "eventoId"
+        in: "path"
+        description: "ID del asistente"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "nombre"
+        in: "formData"
+        description: "Nombre del asistente"
+        required: true
+        type: "string"
+      - name: "infoExtra"
+        in: "formData"
+        description: "infoExtra"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      security:
+      - checkapp_auth:
+        - "write:asistentes"
+      - api_key: []
+securityDefinitions:
+  checkapp_auth:
+    type: "oauth2"
+    authorizationUrl: "checkapp.upb.edu.co/login"
+    flow: "implicit"
+    scopes:
+      write:asistentes: "Agregar asistentes a un evento"
+      read:eventos: "Vea la información general de los eventos"
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+definitions:
+  Evento:
+    type: "object"
+    required:
+    - "name"
+    - "institucion"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+        example: "doggie"
+      descrip:
+        type: "string"
+        example: "Esto es un evento academico de la entidad XX, su objetivo es YY."
+      institucion:
+        type: "integer"
+        example: "1"
+      status:
+        type: "string"
+        description: "Status del evento"
+        enum:
+        - "0"
+        - "1"
+    xml:
+      name: "Evento"
+  Asistente:
+    type: "object"
+    required:
+    - "name"
+    - "institucion"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+        example: "Andrea Claro"
+      institucion:
+        type: "integer"
+        example: "1"
+      infoExtra:
+        type: "array"
+        xml:
+          name: "tag"
+          wrapped: true
+        items:
+          type: "string"
+    xml:
+      name: "Asistente"
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"
